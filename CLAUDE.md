@@ -4,37 +4,61 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture Overview
 
-This is the Claude Code commands directory (`/Users/user/.claude/commands`) containing custom slash command definitions. Each markdown file defines a command that can be invoked in Claude Code sessions.
+This is the Claude Code commands directory (`/Users/user/.claude/commands`) containing custom slash command definitions for development workflow automation. Each markdown file defines a specific command that can be invoked in Claude Code sessions to streamline common development tasks.
 
 ## Command Structure
 
-Commands are defined as markdown files with YAML frontmatter specifying:
-- `description`: Brief command description
-- `allowed-tools`: Specific tools the command can use (optional)
+Commands are markdown files with YAML frontmatter containing:
+- `description`: Brief command description for the user interface
+- `allowed-tools`: Restricted tool access for security (optional)
+- `argument-hint`: Parameter guidance for users (optional)
 
-The command body contains instructions in Chinese describing the command's functionality and execution steps.
+Command bodies contain structured instructions that define the command's execution logic and workflow steps.
 
 ## Available Commands
 
-- `/test-and-fix` - Run tests and automatically fix failures (supports npm test, npm run test:*, npm run lint, npm run fix:*)
-- `/debug-error` - Debug and fix errors in the codebase
-- `/refactor` - Refactor code following best practices
-- `/optimize` - Optimize code performance
-- `/security-review` - Perform security analysis
-- `/docs` - Generate or update documentation
+### Development & Testing
+- `/test-and-fix` - Automated test execution and failure resolution (restricted to npm test commands)
+- `/debug-error` - Error analysis and debugging workflow
+- `/optimize` - Code performance optimization
+- `/refactor` - Code refactoring following best practices
+- `/docs` - Documentation generation and updates
 
-## Command Development
+### Git & Release Management
+- `/branch-smart` - Intelligent branch operations (create, switch, merge, delete, sync)
+- `/pr-ready` - Pre-pull request validation with comprehensive checks
+- `/git-health` - Repository health analysis and cleanup recommendations
+- `/release-prep` - Version bumping and changelog generation for releases
+- `/commit-smart` - Intelligent commit message generation and staging
+- `/sync-upstream` - Upstream synchronization for forked repositories
+- `/fix-conflicts` - Merge conflict resolution assistance
+- `/revert-safe` - Safe commit/merge reverting with impact analysis
+
+### Security & Quality
+- `/security-review` - Security vulnerability scanning and analysis
+
+## Command Execution Model
+
+Commands operate through a structured workflow:
+
+1. **Status Assessment** - Commands begin by evaluating current project state using git commands and dynamic status checks (e.g., `!git branch --show-current`)
+2. **Tool Restrictions** - Security-sensitive commands use `allowed-tools` to limit tool access (e.g., `/test-and-fix` only allows specific npm commands)
+3. **Parameterization** - Commands accept arguments via `$ARGUMENTS` placeholder for customization
+4. **Multi-step Execution** - Complex workflows break down into numbered steps with validation between stages
+
+## Command Development Guidelines
 
 When creating new commands:
-1. Use markdown format with YAML frontmatter
-2. Include clear descriptions of the command purpose
-3. Specify allowed-tools if command needs restricted tool access
-4. Use `$ARGUMENTS` placeholder for user-provided parameters
-5. Structure instructions as numbered steps for clarity
+- Use YAML frontmatter for metadata
+- Structure instructions as numbered workflows
+- Include dynamic status checks with `!command` syntax
+- Implement appropriate tool restrictions for security
+- Provide argument hints for user guidance
+- Follow the established pattern of status → analysis → action → verification
 
-## Key Notes
+## Security Considerations
 
-- This directory defines command templates, not executable code
-- Commands are invoked in actual project directories where they operate on real codebases
-- The `allowed-tools` restriction in `/test-and-fix` limits it to specific npm commands for safety
-- All command descriptions are currently in Chinese
+- Commands with `allowed-tools` restrictions prevent unauthorized operations
+- Git operations are scoped to prevent destructive actions
+- Test commands are limited to standard npm scripts
+- Security review commands focus on defensive analysis only
