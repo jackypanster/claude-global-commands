@@ -1,11 +1,12 @@
 ---
-allowed-tools: Bash, Read, Write
+allowed-tools: Bash, Read, Write, AskUserQuestion
 description: Save a note to personal knowledge base with Johnny.Decimal classification
 ---
 
 # Save Note to Knowledge Base
 
 Load and follow the `note-manager` skill instructions for the **Save** function.
+Also load `obsidian-markdown` skill for Obsidian syntax reference.
 
 **Knowledge base location**: `~/workspace/notes/`
 
