@@ -1,5 +1,5 @@
 ---
-description: Debug and fix errors in the codebase
+description: "Debug and fix errors in the codebase. Trigger: debug, fix error, 报错, stack trace. Do NOT use for: code review (use code-review-fix), systematic investigation (use investigate)."
 ---
 
 分析并修复代码中的错误。请提供：

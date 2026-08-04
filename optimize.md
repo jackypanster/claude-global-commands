@@ -1,5 +1,5 @@
 ---
-description: Analyze and optimize code performance
+description: "Analyze and optimize code performance. Trigger: optimize, performance, 性能优化, slow. Do NOT use for: refactoring without perf goal (use refactor)."
 ---
 
 分析代码性能并提供优化建议：

@@ -1,5 +1,5 @@
 ---
-description: Refactor code following best practices
+description: "Refactor code following best practices. Trigger: refactor, 重构, restructure. Do NOT use for: bug fixes (use debug-error), cosmetic cleanup only (use clean-code)."
 ---
 
 重构代码以提高质量：

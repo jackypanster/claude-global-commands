@@ -1,5 +1,5 @@
 ---
-description: Generate comprehensive documentation
+description: "Generate comprehensive documentation. Trigger: generate docs, 生成文档, document this. Do NOT use for: updating existing docs (use update-docs)."
 ---
 
 为代码生成文档：

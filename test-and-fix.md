@@ -1,6 +1,6 @@
 ---
 allowed-tools: Bash(npm test), Bash(npm run test:*), Bash(npm run lint), Bash(npm run fix:*)
-description: Run tests and automatically fix failures
+description: "Run tests and automatically fix failures. Trigger: run tests, fix tests, 跑测试, test failures. Do NOT use for: writing new tests from scratch."
 ---
 
 运行项目测试，如果发现失败则自动尝试修复。请按以下步骤执行：

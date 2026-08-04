@@ -85,6 +85,19 @@ If `$STORE` missing → fail with: `Handoff store missing at $STORE. Either: (a)
      ```
    - Wait for user response. Execute selected `[N]` actions. Skipped candidates drop — next RESUME resurfaces them if still active in source HANDOFFs.
    - If zero candidates: print nothing, proceed to step 5.
+4b. **Cross-machine ops reminder (non-blocking).** If `~/workspace/meta-ops/` exists, print one line:
+   ```bash
+   META_OPS=~/workspace/meta-ops
+   HOST=$(cat ~/.config/meta-ops/host 2>/dev/null || hostname -s)
+   if [ -d "$META_OPS/log" ]; then
+     ALL=$(ls "$META_OPS"/log/*.md 2>/dev/null | xargs -n1 basename 2>/dev/null \
+       | sed -E 's/^([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}).*/\1/' | sort -u)
+     DONE=$(sort -u "$META_OPS/applied/$HOST.txt" 2>/dev/null)
+     PENDING=$(comm -23 <(echo "$ALL") <(echo "$DONE") | grep -c .)
+     [ "$PENDING" -gt 0 ] && echo "Cross-machine ops: $PENDING pending on $HOST. Run /sync-ops apply."
+   fi
+   ```
+   ID format is `YYYY-MM-DD-NNN`; filename has slug suffix that must be stripped before comparing to ledger. Prints nothing if zero or store missing. **Never blocks RESUME.**
 5. **Drop into the first own-project P0 without asking.** Stop only if the first action involves: key rotation, destructive migration (DROP TABLE, rm -rf shared paths, force-push to main), or paid API spend. Those need explicit human auth.
 
 ## Document schema (WRITE follows this exactly)

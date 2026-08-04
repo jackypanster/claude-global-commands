@@ -1,6 +1,6 @@
 ---
 allowed-tools: Bash(git log), Bash(git show), Bash(git revert), Bash(git reset), Bash(git stash)
-description: Safe revert operations with impact analysis
+description: "Safe revert operations with impact analysis. Trigger: revert, 回滚, undo commit. Do NOT use for: git reset --hard (destructive, use with caution)."
 argument-hint: [commit-hash|HEAD~n]
 ---
 
